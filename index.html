@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Mark Student Attendance</h1>
+
+    <!-- Mark Attendance Form -->
+    <form method="POST" action="/mark">
+        <label for="student">Select Student:</label>
+        <select name="student" id="student" required>
+            {% for student in students %}
+                <option value="{{ student['student_id'] }}">{{ student['name'] }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="subject">Select Subject:</label>
+        <select name="subject" id="subject" required>
+            {% for subject in subjects %}
+                <option value="{{ subject['subject_id'] }}">{{ subject['subject_name'] }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="status">Attendance Status:</label>
+        <select name="status" id="status" required>
+            <option value="Present">Present</option>
+            <option value="Absent">Absent</option>
+        </select>
+
+        <button type="submit">Submit Attendance</button>
+    </form>
+
+    <!-- Delete Attendance Form -->
+    <form method="POST" action="/delete">
+        <label for="date">Delete attendance for date:</label>
+        <input type="date" name="date" id="date" required>
+        <button type="submit">Delete Attendance</button>
+    </form>
+
+    <!-- View Report Button -->
+    <form method="GET" action="/report">
+        <button type="submit">View Attendance Report</button>
+    </form>
+
+</body>
+</html>
